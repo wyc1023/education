@@ -1,26 +1,2461 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>童欣托管 - 专业幼儿托管服务</title>
-    <meta name="description" content="童欣托管专注幼儿园小中大班及小学1-3年级课后托管服务，提供作业辅导、习惯养成、爱心呵护，让家长安心工作，孩子快乐成长。" />
-    <meta name="keywords" content="幼儿托管,课后托管,小学生托管,幼儿园托管,作业辅导,课后辅导,托管班,晚托,寒暑假托管" />
-    <meta name="author" content="童欣托管" />
-    <meta property="og:title" content="童欣托管 - 专业幼儿托管服务" />
-    <meta property="og:description" content="专注幼儿园及小学1-3年级课后托管，让家长安心工作，孩子快乐成长" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://bolt.new/static/og_default.png" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="童欣托管 - 专业幼儿托管服务" />
-    <meta name="twitter:description" content="专注幼儿园及小学1-3年级课后托管" />
-    <meta name="twitter:image" content="https://bolt.new/static/og_default.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>童欣托管 - 专业幼儿托管服务</title>
+  <meta name="description" content="童欣托管专注幼儿园小中大班及小学1-3年级课后托管服务，提供作业辅导、习惯养成、爱心呵护，让家长安心工作，孩子快乐成长。">
+  <meta name="keywords" content="幼儿托管,课后托管,小学生托管,幼儿园托管,作业辅导,课后辅导,托管班,晚托,寒暑假托管">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      color: #1f2937;
+      background: #fff;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    nav.scrolled {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .nav-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #fb923c, #ec4899, #a855f7);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(251, 146, 60, 0.4);
+    }
+
+    .logo-icon svg {
+      width: 24px;
+      height: 24px;
+      color: white;
+    }
+
+    .logo-text {
+      font-size: 1.25rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #f97316, #ec4899, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    nav:not(.scrolled) .logo-text {
+      color: white;
+      -webkit-text-fill-color: white;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .desktop-nav {
+      display: none;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .nav-link {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #4b5563;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    nav:not(.scrolled) .nav-link {
+      color: white;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .nav-link:hover {
+      color: #f97316;
+    }
+
+    .nav-cta {
+      padding: 0.625rem 1.25rem;
+      background: linear-gradient(90deg, #fb923c, #ec4899);
+      color: white;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(251, 146, 60, 0.4);
+      transition: all 0.3s;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(251, 146, 60, 0.5);
+    }
+
+    .mobile-menu-btn {
+      display: flex;
+      padding: 0.5rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .mobile-menu-btn svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    nav:not(.scrolled) .mobile-menu-btn svg {
+      color: white;
+    }
+
+    nav.scrolled .mobile-menu-btn svg {
+      color: #4b5563;
+    }
+
+    .mobile-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: white;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .mobile-menu.open {
+      max-height: 400px;
+      opacity: 1;
+    }
+
+    .mobile-menu-content {
+      padding: 1rem;
+    }
+
+    .mobile-nav-link {
+      display: block;
+      padding: 0.75rem 0;
+      color: #4b5563;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .mobile-nav-link:hover {
+      color: #f97316;
+    }
+
+    .mobile-cta {
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: 0.875rem;
+      background: linear-gradient(90deg, #fb923c, #ec4899);
+      color: white;
+      border-radius: 9999px;
+      text-decoration: none;
+      font-weight: 500;
+      margin-top: 0.5rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #fb923c, #f472b6, #a855f7);
+    }
+
+    .hero-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      mix-blend-mode: multiply;
+      animation: blob 8s ease-in-out infinite;
+    }
+
+    .hero-blob-1 {
+      top: 5%;
+      left: 5%;
+      width: 300px;
+      height: 300px;
+      background: #fde047;
+      animation-delay: 0s;
+    }
+
+    .hero-blob-2 {
+      top: 20%;
+      right: 5%;
+      width: 300px;
+      height: 300px;
+      background: #fbcfe8;
+      animation-delay: 2s;
+    }
+
+    .hero-blob-3 {
+      bottom: 10%;
+      left: 40%;
+      width: 300px;
+      height: 300px;
+      background: #93c5fd;
+      animation-delay: 4s;
+    }
+
+    @keyframes blob {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(20px, 30px) scale(1.1); }
+      50% { transform: translate(-10px, -20px) scale(0.95); }
+      75% { transform: translate(15px, 10px) scale(1.05); }
+    }
+
+    .floating-star {
+      position: absolute;
+      color: rgba(255, 255, 255, 0.3);
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 6rem 1rem 2rem;
+      width: 100%;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.5rem 1rem;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      border-radius: 9999px;
+      color: white;
+      font-size: 0.875rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-badge svg {
+      width: 16px;
+      height: 16px;
+      margin-right: 0.5rem;
+    }
+
+    .hero-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: white;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title-highlight {
+      background: linear-gradient(90deg, #fef3c7, #fefce8, white);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-desc {
+      font-size: 1.125rem;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 2rem;
+      max-width: 500px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 2rem;
+      background: white;
+      color: #f97316;
+      border-radius: 9999px;
+      font-size: 1.125rem;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.25);
+    }
+
+    .btn-primary svg {
+      width: 20px;
+      height: 20px;
+      margin-left: 0.5rem;
+      transition: transform 0.3s;
+    }
+
+    .btn-primary:hover svg {
+      transform: translateX(4px);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 2rem;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      color: white;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 9999px;
+      font-size: 1.125rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .service-cards {
+      display: none;
+      margin-top: 3rem;
+    }
+
+    .service-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      transition: all 0.3s;
+    }
+
+    .service-card:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .service-card-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .service-card-icon svg {
+      width: 28px;
+      height: 28px;
+      color: white;
+    }
+
+    .service-card h3 {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 0.5rem;
+    }
+
+    .service-card p {
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: bounce 1.5s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(10px); }
+    }
+
+    .scroll-indicator-box {
+      width: 24px;
+      height: 40px;
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      border-radius: 12px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 4px;
+    }
+
+    .scroll-indicator-dot {
+      width: 6px;
+      height: 12px;
+      background: white;
+      border-radius: 3px;
+      animation: scroll-dot 1.5s infinite;
+    }
+
+    @keyframes scroll-dot {
+      0% { height: 12px; }
+      50% { height: 6px; }
+      100% { height: 12px; }
+    }
+
+    /* Stats Section */
+    .stats-section {
+      position: relative;
+      margin-top: -5rem;
+      z-index: 20;
+      padding: 0 1rem;
+    }
+
+    .stats-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 1.5rem;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+      padding: 1.5rem;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #f97316, #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .stat-label {
+      color: #6b7280;
+      font-size: 0.875rem;
+      margin-top: 0.25rem;
+    }
+
+    /* Section Title */
+    .section {
+      padding: 4rem 1rem;
+    }
+
+    .section-label {
+      display: inline-block;
+      padding: 0.375rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+
+    .section-label-orange {
+      background: #ffedd5;
+      color: #ea580c;
+    }
+
+    .section-label-blue {
+      background: #dbeafe;
+      color: #2563eb;
+    }
+
+    .section-label-green {
+      background: #dcfce7;
+      color: #16a34a;
+    }
+
+    .section-label-pink {
+      background: #fce7f3;
+      color: #db2777;
+    }
+
+    .section-label-purple {
+      background: #f3e8ff;
+      color: #9333ea;
+    }
+
+    .section-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #1f2937;
+      margin-bottom: 1rem;
+    }
+
+    .section-desc {
+      color: #6b7280;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    /* About Section */
+    .about-section {
+      background: linear-gradient(180deg, white, #fff7ed);
+    }
+
+    .about-image-wrapper {
+      position: relative;
+      margin-bottom: 3rem;
+    }
+
+    .about-image {
+      position: relative;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+    }
+
+    .about-image img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+    }
+
+    .about-image-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 50%, rgba(0, 0, 0, 0.5));
+    }
+
+    .about-image-text {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 1.5rem;
+      color: white;
+    }
+
+    .about-image-text p:first-child {
+      font-size: 1.125rem;
+      font-weight: 700;
+    }
+
+    .about-image-text p:last-child {
+      font-size: 0.875rem;
+      opacity: 0.8;
+    }
+
+    .about-badge {
+      position: absolute;
+      bottom: -1.5rem;
+      right: -1rem;
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(135deg, #facc15, #f97316);
+      border-radius: 1rem;
+      box-shadow: 0 15px 30px rgba(249, 115, 22, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: rotate(6deg);
+    }
+
+    .about-badge-content {
+      text-align: center;
+      color: white;
+      transform: rotate(-6deg);
+    }
+
+    .about-badge-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+
+    .about-badge-text {
+      font-size: 0.75rem;
+    }
+
+    .about-subtitle {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1f2937;
+      margin-bottom: 1rem;
+    }
+
+    .about-text {
+      color: #6b7280;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .feature-item {
+      display: flex;
+      gap: 0.75rem;
+      padding: 1rem;
+      background: white;
+      border-radius: 0.75rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      transition: box-shadow 0.3s;
+    }
+
+    .feature-item:hover {
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .feature-icon {
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #fb923c, #ec4899);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .feature-icon svg {
+      width: 20px;
+      height: 20px;
+      color: white;
+    }
+
+    .feature-title {
+      font-weight: 700;
+      color: #1f2937;
+      font-size: 0.875rem;
+    }
+
+    .feature-desc {
+      color: #6b7280;
+      font-size: 0.75rem;
+      margin-top: 0.25rem;
+    }
+
+    /* Services Section */
+    .services-section {
+      background: linear-gradient(180deg, #fff7ed, white);
+    }
+
+    .service-tabs {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+
+    .service-tabs-wrapper {
+      display: inline-flex;
+      background: #f3f4f6;
+      border-radius: 9999px;
+      padding: 0.25rem;
+    }
+
+    .service-tab {
+      padding: 0.75rem 1.5rem;
+      border-radius: 9999px;
+      font-weight: 500;
+      font-size: 0.875rem;
+      border: none;
+      background: transparent;
+      color: #6b7280;
+      cursor: pointer;
+      transition: all 0.3s;
+      white-space: nowrap;
+    }
+
+    .service-tab.active {
+      background: linear-gradient(90deg, #fb923c, #ec4899);
+      color: white;
+      box-shadow: 0 4px 15px rgba(251, 146, 60, 0.4);
+    }
+
+    .service-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .service-card-item {
+      background: white;
+      border-radius: 1rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+
+    .service-card-item:hover {
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+      transform: translateY(-4px);
+    }
+
+    .service-card-header {
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .service-card-header svg {
+      width: 48px;
+      height: 48px;
+      color: white;
+      opacity: 0.9;
+    }
+
+    .service-card-item:hover .service-card-header svg {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+
+    .service-card-body {
+      padding: 1.25rem;
+    }
+
+    .service-card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #1f2937;
+      margin-bottom: 0.5rem;
+    }
+
+    .service-card-desc {
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+
+    .service-card-link {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 1rem;
+      color: #f97316;
+      font-weight: 500;
+      font-size: 0.875rem;
+      text-decoration: none;
+    }
+
+    .service-card-link svg {
+      width: 16px;
+      height: 16px;
+      margin-left: 0.25rem;
+      transition: transform 0.3s;
+    }
+
+    .service-card-item:hover .service-card-link svg {
+      transform: translateX(4px);
+    }
+
+    /* Schedule Box */
+    .schedule-box {
+      margin-top: 3rem;
+      background: linear-gradient(90deg, #fb923c, #ec4899, #a855f7);
+      border-radius: 1.5rem;
+      padding: 2rem;
+      color: white;
+    }
+
+    .schedule-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .schedule-text {
+      opacity: 0.9;
+      margin-bottom: 1.5rem;
+    }
+
+    .schedule-items {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .schedule-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .schedule-item svg {
+      width: 20px;
+      height: 20px;
+      color: #fde047;
+    }
+
+    .schedule-card {
+      margin-top: 2rem;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      border-radius: 1rem;
+      padding: 1.5rem;
+    }
+
+    .schedule-card svg {
+      width: 48px;
+      height: 48px;
+      color: #fde047;
+      margin-bottom: 1rem;
+    }
+
+    .schedule-card-title {
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .schedule-card-text {
+      font-size: 0.875rem;
+      opacity: 0.8;
+    }
+
+    /* Teachers Section */
+    .teachers-section {
+      background: linear-gradient(180deg, white, #eff6ff);
+    }
+
+    .teachers-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .teacher-card {
+      background: white;
+      border-radius: 1rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+
+    .teacher-card:hover {
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    .teacher-image {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .teacher-image img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+
+    .teacher-card:hover .teacher-image img {
+      transform: scale(1.1);
+    }
+
+    .teacher-info {
+      padding: 1.25rem;
+      text-align: center;
+    }
+
+    .teacher-name {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: #1f2937;
+    }
+
+    .teacher-title {
+      color: #f97316;
+      font-weight: 500;
+      font-size: 0.875rem;
+      margin-top: 0.25rem;
+    }
+
+    .teacher-exp {
+      color: #6b7280;
+      font-size: 0.875rem;
+      margin-top: 0.5rem;
+    }
+
+    .teacher-specialty {
+      color: #9ca3af;
+      font-size: 0.75rem;
+      margin-top: 0.25rem;
+    }
+
+    /* Gallery Section */
+    .gallery-section {
+      background: linear-gradient(180deg, #eff6ff, white);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+    }
+
+    .gallery-item {
+      position: relative;
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      aspect-ratio: 16/10;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 50%, rgba(0, 0, 0, 0.5));
+      opacity: 0;
+      transition: opacity 0.3s;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 1rem;
+    }
+
+    .gallery-item:hover .gallery-overlay {
+      opacity: 1;
+    }
+
+    .gallery-play {
+      width: 48px;
+      height: 48px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: scale(0);
+      transition: transform 0.3s;
+    }
+
+    .gallery-item:hover .gallery-play {
+      transform: scale(1);
+    }
+
+    .gallery-play svg {
+      width: 24px;
+      height: 24px;
+      color: #f97316;
+      margin-left: 4px;
+    }
+
+    /* Testimonials Section */
+    .testimonials-section {
+      background: linear-gradient(135deg, #fb923c, #ec4899, #a855f7);
+      padding: 4rem 1rem;
+    }
+
+    .testimonials-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: white;
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .testimonials-subtitle {
+      color: rgba(255, 255, 255, 0.8);
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .testimonial-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      border-radius: 1rem;
+      padding: 1.25rem;
+      color: white;
+    }
+
+    .testimonial-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .testimonial-avatar {
+      width: 48px;
+      height: 48px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #f97316;
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .testimonial-name {
+      font-weight: 700;
+    }
+
+    .testimonial-child {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.875rem;
+    }
+
+    .testimonial-text {
+      font-size: 0.875rem;
+      line-height: 1.6;
+      opacity: 0.9;
+    }
+
+    .testimonial-stars {
+      display: flex;
+      gap: 0.25rem;
+      margin-top: 1rem;
+    }
+
+    .testimonial-stars svg {
+      width: 16px;
+      height: 16px;
+      color: #fde047;
+    }
+
+    /* Contact Section */
+    .contact-section {
+      background: linear-gradient(180deg, white, #f9fafb);
+    }
+
+    .contact-info {
+      background: linear-gradient(135deg, #fb923c, #ec4899);
+      border-radius: 1.5rem;
+      padding: 1.5rem;
+      color: white;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-info-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .contact-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .contact-icon {
+      width: 56px;
+      height: 56px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-icon svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    .contact-label {
+      font-size: 0.875rem;
+      opacity: 0.8;
+    }
+
+    .contact-value {
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .contact-value-small {
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    .qr-card {
+      background: white;
+      border-radius: 1rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      padding: 1.5rem;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .qr-placeholder {
+      width: 160px;
+      height: 160px;
+      background: #f3f4f6;
+      border: 2px dashed #d1d5db;
+      border-radius: 12px;
+      margin: 0 auto 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #9ca3af;
+    }
+
+    .qr-text {
+      font-weight: 500;
+      color: #1f2937;
+    }
+
+    .qr-subtext {
+      font-size: 0.875rem;
+      color: #6b7280;
+      margin-top: 0.25rem;
+    }
+
+    .location-card {
+      background: white;
+      border-radius: 1rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .location-card svg {
+      width: 32px;
+      height: 32px;
+      color: #f97316;
+      margin: 0 auto 0.75rem;
+    }
+
+    .location-title {
+      font-weight: 500;
+      color: #1f2937;
+      margin-bottom: 0.5rem;
+    }
+
+    .location-text {
+      font-size: 0.875rem;
+      color: #6b7280;
+    }
+
+    /* Footer */
+    footer {
+      background: #111827;
+      color: white;
+      padding: 3rem 1rem;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .footer-logo {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #fb923c, #ec4899, #a855f7);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .footer-logo svg {
+      width: 24px;
+      height: 24px;
+      color: white;
+    }
+
+    .footer-name {
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .footer-desc {
+      color: #9ca3af;
+      margin-bottom: 1.5rem;
+      font-size: 0.875rem;
+      line-height: 1.8;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .footer-social-item {
+      width: 40px;
+      height: 40px;
+      background: #374151;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      color: white;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .footer-social-item:hover {
+      background: #f97316;
+    }
+
+    .footer-section {
+      margin-top: 2rem;
+    }
+
+    .footer-section-title {
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-links a {
+      color: #9ca3af;
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: #f97316;
+    }
+
+    .footer-copyright {
+      border-top: 1px solid #374151;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      text-align: center;
+      color: #6b7280;
+      font-size: 0.875rem;
+    }
+
+    /* Gradient colors */
+    .gradient-orange-red {
+      background: linear-gradient(135deg, #fb923c, #ef4444);
+    }
+
+    .gradient-blue-cyan {
+      background: linear-gradient(135deg, #60a5fa, #22d3ee);
+    }
+
+    .gradient-emerald-teal {
+      background: linear-gradient(135deg, #34d399, #2dd4bf);
+    }
+
+    .gradient-pink-rose {
+      background: linear-gradient(135deg, #f472b6, #fb7185);
+    }
+
+    .gradient-orange-amber {
+      background: linear-gradient(135deg, #fb923c, #fbbf24);
+    }
+
+    .gradient-blue-indigo {
+      background: linear-gradient(135deg, #60a5fa, #818cf8);
+    }
+
+    /* Desktop styles */
+    @media (min-width: 768px) {
+      .nav-content {
+        height: 80px;
+      }
+
+      .logo-icon {
+        width: 48px;
+        height: 48px;
+      }
+
+      .logo-icon svg {
+        width: 28px;
+        height: 28px;
+      }
+
+      .logo-text {
+        font-size: 1.5rem;
+      }
+
+      .desktop-nav {
+        display: flex;
+      }
+
+      .mobile-menu-btn {
+        display: none;
+      }
+
+      .hero-title {
+        font-size: 3.5rem;
+      }
+
+      .hero-desc {
+        font-size: 1.25rem;
+      }
+
+      .hero-buttons {
+        flex-direction: row;
+      }
+
+      .service-cards {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+
+      .stats-container {
+        padding: 2rem;
+      }
+
+      .stat-value {
+        font-size: 3rem;
+      }
+
+      .stat-label {
+        font-size: 1rem;
+      }
+
+      .section {
+        padding: 6rem 2rem;
+      }
+
+      .section-title {
+        font-size: 2.25rem;
+      }
+
+      .about-image img {
+        height: 400px;
+      }
+
+      .about-badge {
+        width: 160px;
+        height: 160px;
+      }
+
+      .about-badge-number {
+        font-size: 3.5rem;
+      }
+
+      .service-cards-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .service-card-header {
+        height: 128px;
+      }
+
+      .teachers-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+      }
+
+      .testimonials-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+      }
+
+      .contact-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      .contact-info {
+        margin-bottom: 0;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 3rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .footer-brand-col {
+        grid-column: span 2;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .hero-content {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 4rem;
+        align-items: center;
+        padding-top: 0;
+      }
+
+      .hero-text {
+        text-align: left;
+      }
+
+      .hero-buttons {
+        justify-content: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav id="navbar">
+    <div class="nav-container">
+      <div class="nav-content">
+        <a href="#hero" class="logo">
+          <div class="logo-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+            </svg>
+          </div>
+          <span class="logo-text">童欣托管</span>
+        </a>
+
+        <div class="desktop-nav">
+          <a href="#hero" class="nav-link">首页</a>
+          <a href="#about" class="nav-link">关于我们</a>
+          <a href="#services" class="nav-link">托管服务</a>
+          <a href="#teachers" class="nav-link">师资团队</a>
+          <a href="#gallery" class="nav-link">学员风采</a>
+          <a href="#contact" class="nav-cta">预约参观</a>
+        </div>
+
+        <button class="mobile-menu-btn" id="menuBtn" aria-label="菜单">
+          <svg id="menuIconOpen" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="4" x2="20" y1="12" y2="12"/>
+            <line x1="4" x2="20" y1="6" y2="6"/>
+            <line x1="4" x2="20" y1="18" y2="18"/>
+          </svg>
+          <svg id="menuIconClose" style="display:none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6 6 18"/>
+            <path d="m6 6 12 12"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <div class="mobile-menu-content">
+        <a href="#hero" class="mobile-nav-link">首页</a>
+        <a href="#about" class="mobile-nav-link">关于我们</a>
+        <a href="#services" class="mobile-nav-link">托管服务</a>
+        <a href="#teachers" class="mobile-nav-link">师资团队</a>
+        <a href="#gallery" class="mobile-nav-link">学员风采</a>
+        <a href="#contact" class="mobile-nav-link">联系我们</a>
+        <a href="#contact" class="mobile-cta">预约参观</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="hero" class="hero">
+    <div class="hero-bg">
+      <div class="hero-blob hero-blob-1"></div>
+      <div class="hero-blob hero-blob-2"></div>
+      <div class="hero-blob hero-blob-3"></div>
+    </div>
+
+    <!-- Floating Stars -->
+    <svg class="floating-star" style="left: 5%; top: 10%; animation-delay: 0s; animation-duration: 4s;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+    </svg>
+    <svg class="floating-star" style="left: 15%; top: 30%; animation-delay: 1s; animation-duration: 5s;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+    </svg>
+    <svg class="floating-star" style="left: 85%; top: 20%; animation-delay: 2s; animation-duration: 4.5s;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+    </svg>
+    <svg class="floating-star" style="left: 75%; top: 60%; animation-delay: 0.5s; animation-duration: 5.5s;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+    </svg>
+    <svg class="floating-star" style="left: 25%; top: 70%; animation-delay: 3s; animation-duration: 3.5s;" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+    </svg>
+    <svg class="floating-star" style="left: 50%; top: 40%; animation-delay: 1.5s; animation-duration: 6s;" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+    </svg>
+
+    <div class="hero-content">
+      <div class="hero-text">
+        <div class="hero-badge">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813A2 2 0 0 1 15.187 13.912L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+            <path d="M5 3v4"/>
+            <path d="M19 17v4"/>
+            <path d="M3 5h4"/>
+            <path d="M17 19h4"/>
+          </svg>
+          新店开业 欢迎参观
+        </div>
+
+        <h1 class="hero-title">
+          童欣托管<br>
+          <span class="hero-title-highlight">放心托付 快乐成长</span>
+        </h1>
+
+        <p class="hero-desc">
+          为幼儿园小中大班及小学1-3年级的孩子<br>
+          提供温馨的课后托管服务，让家长安心工作
+        </p>
+
+        <div class="hero-buttons">
+          <a href="#contact" class="btn-primary">
+            预约参观
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m9 18 6-6-6-6"/>
+            </svg>
+          </a>
+          <a href="#services" class="btn-secondary">了解服务</a>
+        </div>
+
+        <!-- Service Cards - Desktop -->
+        <div class="service-cards">
+          <div class="service-card">
+            <div class="service-card-icon gradient-orange-red">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/>
+                <path d="m9 10 2 2 4-4"/>
+              </svg>
+            </div>
+            <h3>作业辅导</h3>
+            <p>督促完成作业<br>耐心答疑解惑</p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-card-icon gradient-blue-cyan">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+                <path d="M14 2v6h6"/>
+                <path d="M12 18v-6"/>
+                <path d="m9 15 3 3 3-3"/>
+              </svg>
+            </div>
+            <h3>学习氛围</h3>
+            <p>安静的学习环境<br>培养专注习惯</p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-card-icon gradient-pink-rose">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+              </svg>
+            </div>
+            <h3>爱心呵护</h3>
+            <p>细心照顾生活<br>像家人一样关怀</p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-card-icon gradient-emerald-teal">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
+            <h3>时间管理</h3>
+            <p>规律作息安排<br>养成良好习惯</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-indicator">
+      <div class="scroll-indicator-box">
+        <div class="scroll-indicator-dot"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats-section">
+    <div class="stats-container">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-value">5</div>
+          <div class="stat-label">办学年限</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">300+</div>
+          <div class="stat-label">服务家庭</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">98%</div>
+          <div class="stat-label">家长满意度</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">8+</div>
+          <div class="stat-label">专业老师</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="section about-section">
+    <div style="max-width:1200px;margin:0 auto;">
+
+     <div style="text-align:center;margin-bottom:3rem;">
+        <span class="section-label section-label-orange">关于我们</span>
+        <h2 class="section-title">专业幼儿托管机构</h2>
+        <p class="section-desc" style="margin:0 auto;">
+          童欣托管专注于幼儿园小中大班及小学1-3年级学生的课后托管服务，为孩子提供一个温馨、安全的学习成长空间，让家长安心工作。
+        </p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr;gap:2rem;" class="about-grid">
+        <div class="about-image-wrapper">
+          <div class="about-image">
+            <img src="https://images.pexels.com/photos/8617889/pexels-photo-8617889.jpeg?auto=compress&cs=tinysrgb&w=600" alt="托管环境">
+            <div class="about-image-overlay"></div>
+            <div class="about-image-text">
+              <p>温馨的托管环境</p>
+              <p>为孩子创造最佳成长空间</p>
+            </div>
+          </div>
+          <div class="about-badge">
+            <div class="about-badge-content">
+              <div class="about-badge-number">5</div>
+              <div class="about-badge-text">年用心经营</div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="about-subtitle">用心呵护，让家长放心</h3>
+          <p class="about-text">
+            我们提供安全、舒适的托管环境，帮助孩子在放学后有一个固定的去处。在这里，孩子们可以完成作业、养成良好学习习惯、与同龄伙伴一起成长。我们的老师会耐心督促和辅导，培养孩子的专注力和自理能力。
+          </p>
+
+          <div class="features-grid">
+            <div class="feature-item">
+              <div class="feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+              </div>
+              <div>
+                <div class="feature-title">小班管理</div>
+                <div class="feature-desc">每班不超过10人</div>
+              </div>
+            </div>
+
+            <div class="feature-item">
+              <div class="feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+                </svg>
+              </div>
+              <div>
+                <div class="feature-title">爱心呵护</div>
+                <div class="feature-desc">像家人一样照顾</div>
+              </div>
+            </div>
+
+            <div class="feature-item">
+              <div class="feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                  <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+              </div>
+              <div>
+                <div class="feature-title">温馨环境</div>
+                <div class="feature-desc">安全舒适场地</div>
+              </div>
+            </div>
+
+            <div class="feature-item">
+              <div class="feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+              </div>
+              <div>
+                <div class="feature-title">习惯培养</div>
+                <div class="feature-desc">学习习惯和自理能力</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="section services-section">
+    <div style="max-width:1200px;margin:0 auto;">
+      <div style="text-align:center;margin-bottom:2rem;">
+        <span class="section-label section-label-blue">托管服务</span>
+        <h2 class="section-title">我们的托管内容</h2>
+        <p class="section-desc" style="margin:0 auto;">
+          根据不同年龄段特点，提供相应的托管照顾和辅导服务
+        </p>
+      </div>
+
+      <div class="service-tabs">
+        <div class="service-tabs-wrapper">
+          <button class="service-tab active" id="tabKindergarten" onclick="switchTab('kindergarten')">幼儿园阶段</button>
+          <button class="service-tab" id="tabPrimary" onclick="switchTab('primary')">小学1-3年级</button>
+        </div>
+      </div>
+
+      <!-- Kindergarten Services -->
+      <div class="service-cards-grid" id="kindergartenServices">
+        <div class="service-card-item">
+          <div class="service-card-header gradient-orange-red">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/>
+            </svg>
+          </div>
+          <div class="service-card-body">
+            <h3 class="service-card-title">启蒙阅读</h3>
+            <p class="service-card-desc">绘本阅读、故事分享、语言启蒙</p>
+            <a href="#contact" class="service-card-link">
+              了解详情
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m9 18 6-6-6-6"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="service-card-item">
+          <div class="service-card-header gradient-blue-cyan">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
+              <path d="m15 5 4 4"/>
+            </svg>
+          </div>
+          <div class="service-card-body">
+            <h3 class="service-card-title">书写启蒙</h3>
+            <p class="service-card-desc">握笔姿势、书写习惯培养</p>
+            <a href="#contact" class="service-card-link">
+              了解详情
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m9 18 6-6-6-6"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="service-card-item">
+          <div class="service-card-header gradient-emerald-teal">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+              <line x1="9" x2="9.01" y1="9" y2="9"/>
+              <line x1="15" x2="15.01" y1="9" y2="9"/>
+            </svg>
+          </div>
+          <div class="service-card-body">
+            <h3 class="service-card-title">习惯养成</h3>
+            <p class="service-card-desc">生活自理、礼貌待人、良好习惯</p>
+            <a href="#contact" class="service-card-link">
+              了解详情
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m9 18 6-6-6-6"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="service-card-item">
+          <div class="service-card-header gradient-pink-rose">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="6" x2="10" y1="12" y2="12"/>
+              <circle cx="8" cy="8" r="2"/>
+              <path d="M21 12a5 5 0 0 0-5-5h-3a5 5 0 0 0-5 5v5a5 5 0 0 0 5 5h2"/>
+              <path d="M21 12v5a2 2 0 0 1-2 2h-2"/>
+              <circle cx="18" cy="12" r="2"/>
+            </svg>
+          </div>
+          <div class="service-card-body">
+            <h3 class="service-card-title">趣味活动</h3>
+            <p class="service-card-desc">益智游戏、手工制作、户外活动</p>
+            <a href="#contact" class="service-card-link">
+              了解详情
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m9 18 6-6-6-6"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Primary Services -->
+      <div class="service-cards-grid" id="primaryServices" style="display:none;">
+        <div class="service-card-item">
+          <div class="service-card-header gradient-orange-amber">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/>
+              <path d="m9 10 2 2 4-4"/>
+            </svg>
+          </div>
+          <div class="service-card-body">
+            <h3 class="service-card-title">作业辅导</h3>
+            <p class="service-card-desc">督促完成作业、检查纠错、答疑解惑</p>
+            <a href="#contact" class="service-card-link">
+              了解详情
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m9 18 6-6-6-6"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="service-card-item">
+          <div class="service-card-header gradient-blue-indigo">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <div class="service-card-body">
+            <h3 class="service-card-title">时间管理</h3>
+            <p class="service-card-desc">培养时间观念、提高学习效率</p>
+            <a href="#contact" class="service-card-link">
+              了解详情
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m9 18 6-6-6-6"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="service-card-item">
+          <div class="service-card-header gradient-emerald-teal">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+              <path d="M14 2v6h6"/>
+              <path d="M12 18v-6"/>
+              <path d="m9 15 3 3 3-3"/>
+            </svg>
+          </div>
+          <div class="service-card-body">
+            <h3 class="service-card-title">学习氛围</h3>
+            <p class="service-card-desc">安静学习环境、专注力培养</p>
+            <a href="#contact" class="service-card-link">
+              了解详情
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m9 18 6-6-6-6"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="service-card-item">
+          <div class="service-card-header gradient-pink-rose">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/>
+            </svg>
+          </div>
+          <div class="service-card-body">
+            <h3 class="service-card-title">阅读习惯</h3>
+            <p class="service-card-desc">课外阅读指导、知识拓展</p>
+            <a href="#contact" class="service-card-link">
+              了解详情
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m9 18 6-6-6-6"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Schedule Box -->
+      <div class="schedule-box">
+        <div style="display:grid;grid-template-columns:1fr;gap:2rem;">
+          <div>
+            <h3 class="schedule-title">灵活的托管时间</h3>
+            <p class="schedule-text">我们提供多种托管时间段选择，满足不同家长的需求。安全的环境、专业的照顾，让孩子开心、家长放心。</p>
+            <div class="schedule-items">
+              <div class="schedule-item">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                  <path d="m9 11 3 3L22 4"/>
+                </svg>
+                <span>课后托管：周一至周五 15:30-19:00</span>
+              </div>
+              <div class="schedule-item">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                  <path d="m9 11 3 3L22 4"/>
+                </svg>
+                <span>寒暑假托管：8:00-18:00 全天服务</span>
+              </div>
+              <div class="schedule-item">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                  <path d="m9 11 3 3L22 4"/>
+                </svg>
+                <span>周末托管：周六 9:00-17:00</span>
+              </div>
+            </div>
+          </div>
+          <div class="schedule-card">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 8h1a4 4 0 1 1 0 8h-1"/>
+              <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/>
+              <line x1="6" x2="6" y1="2" y2="4"/>
+              <line x1="10" x2="10" y1="2" y2="4"/>
+              <line x1="14" x2="14" y1="2" y2="4"/>
+            </svg>
+            <h4 class="schedule-card-title">点心供应</h4>
+            <p class="schedule-card-text">下午点心和饮品，保证孩子营养补充</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Teachers Section -->
+  <section id="teachers" class="section teachers-section">
+    <div style="max-width:1200px;margin:0 auto;">
+      <div style="text-align:center;margin-bottom:2rem;">
+        <span class="section-label section-label-green">师资团队</span>
+        <h2 class="section-title">用心的托管老师</h2>
+        <p class="section-desc" style="margin:0 auto;">
+          有爱心、有耐心、有责任心的老师团队，用心照顾每一个孩子
+        </p>
+      </div>
+
+      <div class="teachers-grid">
+        <div class="teacher-card">
+          <div class="teacher-image">
+            <img src="https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=400" alt="王老师">
+          </div>
+          <div class="teacher-info">
+            <div class="teacher-name">王老师</div>
+            <div class="teacher-title">托管主管</div>
+            <div class="teacher-exp">6年幼儿教育经验</div>
+            <div class="teacher-specialty">耐心细致，擅长与小朋友沟通</div>
+          </div>
+        </div>
+
+        <div class="teacher-card">
+          <div class="teacher-image">
+            <img src="https://images.pexels.com/photos/3184404/pexels-photo-3184404.jpeg?auto=compress&cs=tinysrgb&w=400" alt="李老师">
+          </div>
+          <div class="teacher-info">
+            <div class="teacher-name">李老师</div>
+            <div class="teacher-title">辅导老师</div>
+            <div class="teacher-exp">5年小学辅导经验</div>
+            <div class="teacher-specialty">熟悉小学学习内容和习惯培养</div>
+          </div>
+        </div>
+
+        <div class="teacher-card">
+          <div class="teacher-image">
+            <img src="https://images.pexels.com/photos/3769023/pexels-photo-3769023.jpeg?auto=compress&cs=tinysrgb&w=400" alt="张老师">
+          </div>
+          <div class="teacher-info">
+            <div class="teacher-name">张老师</div>
+            <div class="teacher-title">生活老师</div>
+            <div class="teacher-exp">4年保育经验</div>
+            <div class="teacher-specialty">细心照顾孩子生活起居</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section id="gallery" class="section gallery-section">
+    <div style="max-width:1200px;margin:0 auto;">
+      <div style="text-align:center;margin-bottom:2rem;">
+        <span class="section-label section-label-pink">精彩瞬间</span>
+        <h2 class="section-title">孩子们的快乐时光</h2>
+        <p class="section-desc" style="margin:0 auto;">
+          记录孩子们在托管班的快乐成长时光
+        </p>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="https://images.pexels.com/photos/8198906/pexels-photo-8198906.jpeg?auto=compress&cs=tinysrgb&w=400" alt="精彩瞬间 1">
+          <div class="gallery-overlay">
+            <div class="gallery-play">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="6 3 20 12 6 21 6 3"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="https://images.pexels.com/photos/8617889/pexels-photo-8617889.jpeg?auto=compress&cs=tinysrgb&w=400" alt="精彩瞬间 2">
+          <div class="gallery-overlay">
+            <div class="gallery-play">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="6 3 20 12 6 21 6 3"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="https://images.pexels.com/photos/8199149/pexels-photo-8199149.jpeg?auto=compress&cs=tinysrgb&w=400" alt="精彩瞬间 3">
+          <div class="gallery-overlay">
+            <div class="gallery-play">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="6 3 20 12 6 21 6 3"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="https://images.pexels.com/photos/8566459/pexels-photo-8566459.jpeg?auto=compress&cs=tinysrgb&w=400" alt="精彩瞬间 4">
+          <div class="gallery-overlay">
+            <div class="gallery-play">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="6 3 20 12 6 21 6 3"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="https://images.pexels.com/photos/8199632/pexels-photo-8199632.jpeg?auto=compress&cs=tinysrgb&w=400" alt="精彩瞬间 5">
+          <div class="gallery-overlay">
+            <div class="gallery-play">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="6 3 20 12 6 21 6 3"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="https://images.pexels.com/photos/8566512/pexels-photo-8566512.jpeg?auto=compress&cs=tinysrgb&w=400" alt="精彩瞬间 6">
+          <div class="gallery-overlay">
+            <div class="gallery-play">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="6 3 20 12 6 21 6 3"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials-section">
+    <div style="max-width:1200px;margin:0 auto;">
+      <h2 class="testimonials-title">家长真实评价</h2>
+      <p class="testimonials-subtitle">感谢每一位家长的信任与支持</p>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-header">
+            <div class="testimonial-avatar">张</div>
+            <div>
+              <div class="testimonial-name">张妈妈</div>
+              <div class="testimonial-child">小明(一年级)</div>
+            </div>
+          </div>
+          <p class="testimonial-text">孩子放学后有地方去，作业也能按时完成，老师很负责！我们下班接孩子正好，特别方便。</p>
+          <div class="testimonial-stars">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-header">
+            <div class="testimonial-avatar">李</div>
+            <div>
+              <div class="testimonial-name">李爸爸</div>
+              <div class="testimonial-child">小红(大班)</div>
+            </div>
+          </div>
+          <p class="testimonial-text">环境很温馨，老师对孩子们很细心。孩子在这里养成了很好的学习习惯，比在家里效率高多了。</p>
+          <div class="testimonial-stars">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-header">
+            <div class="testimonial-avatar">王</div>
+            <div>
+              <div class="testimonial-name">王妈妈</div>
+              <div class="testimonial-child">小华(二年级)</div>
+            </div>
+          </div>
+          <p class="testimonial-text">之前孩子放学就玩手机，现在能安静写作业了，还有小伙伴一起学习，进步很明显！</p>
+          <div class="testimonial-stars">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-header">
+            <div class="testimonial-avatar">陈</div>
+            <div>
+              <div class="testimonial-name">陈妈妈</div>
+              <div class="testimonial-child">小宝(中班)</div>
+            </div>
+          </div>
+          <p class="testimonial-text">老师很耐心，孩子很喜欢来这里。每天回家都跟我分享在托管班的事，性格也开朗了很多。</p>
+          <div class="testimonial-stars">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-header">
+            <div class="testimonial-avatar">刘</div>
+            <div>
+              <div class="testimonial-name">刘爸爸</div>
+              <div class="testimonial-child">小芳(三年级)</div>
+            </div>
+          </div>
+          <p class="testimonial-text">作业质量提高了，老师会帮忙检查纠错。孩子养成了认真完成作业的好习惯。</p>
+          <div class="testimonial-stars">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-header">
+            <div class="testimonial-avatar">赵</div>
+            <div>
+              <div class="testimonial-name">赵妈妈</div>
+              <div class="testimonial-child">小杰(大班)</div>
+            </div>
+          </div>
+          <p class="testimonial-text">托管班活动丰富，孩子每天都很期待去。老师照顾周到，非常放心！</p>
+          <div class="testimonial-stars">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section contact-section">
+    <div style="max-width:1000px;margin:0 auto;">
+      <div style="text-align:center;margin-bottom:2rem;">
+        <span class="section-label section-label-purple">联系我们</span>
+        <h2 class="section-title">欢迎预约参观</h2>
+        <p class="section-desc" style="margin:0 auto;">
+          新店开业，欢迎家长带孩子前来参观，了解我们的托管环境和服务
+        </p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h3 class="contact-info-title">联系方式</h3>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="contact-label">咨询热线</div>
+              <div class="contact-value">400-XXX-XXXX</div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="20" height="16" x="2" y="4" rx="2"/>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+              </svg>
+            </div>
+            <div>
+              <div class="contact-label">电子邮箱</div>
+              <div class="contact-value-small">info@tongxin.com</div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+            </div>
+            <div>
+              <div class="contact-label">托管地址</div>
+              <div class="contact-value-small">XX市XX区XX路XXX号</div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
+            <div>
+              <div class="contact-label">服务时间</div>
+              <div class="contact-value-small">周一至周日 8:00-20:00</div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="qr-card">
+            <div class="qr-placeholder">二维码</div>
+            <p class="qr-text">扫码关注公众号</p>
+            <p class="qr-subtext">获取更多托管资讯</p>
+          </div>
+
+          <div class="location-card">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+            <p class="location-title">托管位置</p>
+            <p class="location-text">位于XX商圈核心地段，交通便利<br>临近XX小学、XX幼儿园</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand-col">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+            </svg>
+          </div>
+          <span class="footer-name">童欣托管</span>
+        </div>
+        <p class="footer-desc">
+          专注于幼儿园及小学生课后托管服务，为家长分忧，让孩子快乐成长。
+        </p>
+        <div class="footer-social">
+          <a href="#" class="footer-social-item">微</a>
+          <a href="#" class="footer-social-item">微</a>
+          <a href="#" class="footer-social-item">抖</a>
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <h4 class="footer-section-title">快速链接</h4>
+        <ul class="footer-links">
+          <li><a href="#about">关于我们</a></li>
+          <li><a href="#services">托管服务</a></li>
+          <li><a href="#teachers">师资团队</a></li>
+          <li><a href="#gallery">精彩瞬间</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4 class="footer-section-title">联系方式</h4>
+        <ul class="footer-links">
+          <li>电话：400-XXX-XXXX</li>
+          <li>邮箱：info@tongxin.com</li>
+          <li>地址：XX市XX区XX路XXX号</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-copyright">
+      <p>&copy; 2024 童欣托管 版权所有 | 备案号：XXXXXX</p>
+    </div>
+  </footer>
+
+  <script>
+    // Navigation scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuIconOpen = document.getElementById('menuIconOpen');
+    const menuIconClose = document.getElementById('menuIconClose');
+
+    menuBtn.addEventListener('click', function() {
+      mobileMenu.classList.toggle('open');
+      if (mobileMenu.classList.contains('open')) {
+        menuIconOpen.style.display = 'none';
+        menuIconClose.style.display = 'block';
+      } else {
+        menuIconOpen.style.display = 'block';
+        menuIconClose.style.display = 'none';
+      }
+    });
+
+    // Close mobile menu on link click
+    const mobileLinks = document.querySelectorAll('.mobile-nav-link, .mobile-cta');
+    mobileLinks.forEach(function(link) {
+      link.addEventListener('click', function() {
+        mobileMenu.classList.remove('open');
+        menuIconOpen.style.display = 'block';
+        menuIconClose.style.display = 'none';
+      });
+    });
+
+    // Service tabs
+    function switchTab(tab) {
+      const kindergartenTab = document.getElementById('tabKindergarten');
+      const primaryTab = document.getElementById('tabPrimary');
+      const kindergartenServices = document.getElementById('kindergartenServices');
+      const primaryServices = document.getElementById('primaryServices');
+
+      if (tab === 'kindergarten') {
+        kindergartenTab.classList.add('active');
+        primaryTab.classList.remove('active');
+        kindergartenServices.style.display = 'grid';
+        primaryServices.style.display = 'none';
+      } else {
+        kindergartenTab.classList.remove('active');
+        primaryTab.classList.add('active');
+        kindergartenServices.style.display = 'none';
+        primaryServices.style.display = 'grid';
+      }
+    }
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  </script>
+</body>
 </html>
