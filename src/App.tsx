@@ -74,7 +74,7 @@ export default function App() {
   ];
 
   const primaryServices = [
-    { icon: BookCheck, name: '作业辅导', desc: '督促完成作业、检查纠错、答疑解惑', color: 'from-orange-400 to-amber-400' },
+    { icon: BookCheck, name: '作业陪伴', desc: '督促完成作业、检查纠错、答疑解惑', color: 'from-orange-400 to-amber-400' },
     { icon: Timer, name: '时间管理', desc: '培养时间观念、提高学习效率', color: 'from-blue-400 to-indigo-400' },
     { icon: LampDesk, name: '学习氛围', desc: '安静学习环境、专注力培养', color: 'from-emerald-400 to-teal-400' },
     { icon: BookOpen, name: '阅读习惯', desc: '课外阅读指导、知识拓展', color: 'from-pink-400 to-rose-400' },
@@ -94,9 +94,9 @@ export default function App() {
   ];
 
   const stats = [
-    { value: '5', label: '办学年限' },
-    { value: '300+', label: '服务家庭' },
-    { value: '98%', label: '家长满意度' },
+    { value: '6', label: '办学年限' },
+    { value: '500+', label: '服务家庭' },
+    { value: '99%', label: '家长满意度' },
     { value: '8+', label: '专业老师' },
   ];
 
@@ -440,13 +440,13 @@ export default function App() {
                   </div>
                 </div>
               </div>
-              <div className="relative">
-                <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-6">
-                  <Coffee className="w-12 h-12 text-yellow-300 mb-4" />
-                  <h4 className="text-xl font-bold mb-2">点心供应</h4>
-                  <p className="text-white/80 text-sm">下午点心和饮品，保证孩子营养补充</p>
-                </div>
-              </div>
+              {/*<div className="relative">*/}
+              {/*  <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-6">*/}
+              {/*    <Coffee className="w-12 h-12 text-yellow-300 mb-4" />*/}
+              {/*    <h4 className="text-xl font-bold mb-2">点心供应</h4>*/}
+              {/*    <p className="text-white/80 text-sm">下午点心和饮品，保证孩子营养补充</p>*/}
+              {/*  </div>*/}
+              {/*</div>*/}
             </div>
           </div>
         </div>
